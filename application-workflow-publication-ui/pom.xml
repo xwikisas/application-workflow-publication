@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
- *
  * See the NOTICE file distributed with this work for additional
  * information regarding copyright ownership.
  *
@@ -18,46 +17,42 @@
  * License along with this software; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
- *
 -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.xwiki.contrib.workflow-publication</groupId>
-    <artifactId>xwiki-workflow-publication</artifactId>
+    <groupId>com.xwiki.workflow-publication</groupId>
+    <artifactId>application-workflow-publication</artifactId>
     <version>1.8-SNAPSHOT</version>
   </parent>
-  <artifactId>xwiki-workflow-publication-application</artifactId>
-  <name>XWiki Publication Workflow Application</name>
+  <artifactId>application-workflow-publication-ui</artifactId>
+  <name>Publication Workflow Application (Pro)</name>
   <packaging>xar</packaging>
+  <properties>
+    <!-- Name to display by the Extension Manager -->
+    <xwiki.extension.name>Publication Workflow Application (Pro)</xwiki.extension.name>
+    <licensing.version>1.6</licensing.version>
+    <!-- The list of documents that have an implicit unlimited free license. The users can view these documents without
+      buying a license or getting a trial license, but they cannot edit or delete them. -->
+    <xwiki.extension.licensing.publicDocuments>
+      PublicationWorkflow.WebHome
+    </xwiki.extension.licensing.publicDocuments>
+    <!-- Don't run CLIRR here since there's no Java code. -->
+    <xwiki.clirr.skip>true</xwiki.clirr.skip>
+  </properties>
   <dependencies>
+    <dependency>
+      <groupId>com.xwiki.licensing</groupId>
+      <artifactId>application-licensing-licensor-api</artifactId>
+      <version>${licensing.version}</version>
+    </dependency>
     <!-- Adding publication workflow api as dependencies since these pages need the 
       server in order to work properly and for EM to find them related. -->
     <dependency>
-      <groupId>org.xwiki.contrib.workflow-publication</groupId>
-      <artifactId>xwiki-workflow-publication-api</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>application-workflow-publication-api</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
-  <build>
-    <extensions>
-      <extension>
-        <groupId>org.xwiki.commons</groupId>
-        <artifactId>xwiki-commons-tool-xar-handlers</artifactId>
-        <!--  we force 4.3.1 version here since we want to skip the verification of the files and 4.1.4 cannot do it -->
-        <version>4.3.1</version>
-      </extension>
-    </extensions>
-    <plugins>
-      <plugin>
-        <groupId>org.xwiki.commons</groupId>
-        <artifactId>xwiki-commons-tool-xar-plugin</artifactId>
-        <!--  we force 4.3.1 version here since we want to skip the verification of the files and 4.1.4 cannot do it -->
-        <version>4.3.1</version>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

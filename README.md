@@ -1,4 +1,4 @@
-Publication Workflow Application (Pro)
+# Publication Workflow Application (Pro)
 
 * Project Lead: [Vincent Massol](https://github.com/vmassol)
 * [Documentation](https://store.xwiki.com/xwiki/bin/view/Extension/PublicationWorkflowApplication)

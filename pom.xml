@@ -30,7 +30,7 @@
   <name>Publication Workflow Application (Pro) Parent POM</name>
   <description>Simple publication workflow implementation that allows to push a document through various validation states until it is published.</description>
   <packaging>pom</packaging>
-  <version>1.8</version>
+  <version>1.9-SNAPSHOT</version>
   <properties>
     <licensing.version>1.7</licensing.version>
   </properties>
@@ -38,7 +38,7 @@
     <connection>scm:git:git://github.com/xwikisas/workflow-publication.git</connection>
     <developerConnection>scm:git:git@github.com:xwikisas/workflow-publication.git</developerConnection>
     <url>https://github.com/xwikisas/workflow-publication/tree/master/</url>
-    <tag>application-workflow-publication-1.8</tag>
+    <tag>HEAD</tag>
   </scm>
   <modules>
     <module>application-workflow-publication-api</module>

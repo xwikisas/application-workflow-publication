@@ -20,49 +20,29 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.2" reference="PublicationWorkflow.WebHome" locale="">
+<xwikidoc reference="PublicationWorkflow.WebHome" locale="">
   <web>PublicationWorkflow</web>
   <name>WebHome</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
-  <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1357557002000</creationDate>
   <parent>Main.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
   <author>xwiki:XWiki.Admin</author>
+  <customClass/>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1510685551000</date>
-  <contentUpdateDate>1510685229000</contentUpdateDate>
+  <creationDate>1357557002000</creationDate>
+  <date>1512376396000</date>
+  <contentUpdateDate>1512376396000</contentUpdateDate>
   <version>1.1</version>
   <title/>
+  <defaultTemplate/>
+  <validationScript/>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{velocity}}
-#set ($mainPageReference = $services.model.createDocumentReference('', ['PublicationWorkflow'], 'PublicationWorkflowClass'))
-#if (!$services.licensing.licensor.hasLicensureForEntity($mainPageReference))
-  {{error}}
-    $services.localization.render('workflow.error.noValidLicense')
-  {{/error}}
-#else
-  #set($columns = ["doc.title", "contributor", "moderator", "validator"])
-  #set($columnsProperties = {
-     "doc.title" : {"type" : "text", "link" : "view"}
-  })
-  #set($options = { 
-    "className":"PublicationWorkflow.PublicationWorkflowConfigClass",
-    'translationPrefix': 'meeting.livetable.',
-    "rowCount": 10
-  })
-  #livetable("publicationworkflow" $columns $columnsProperties $options)
-#end
-{{/velocity}}</content>
   <object>
-    <name>PublicationWorkflow.WebHome</name>
-    <number>0</number>
-    <className>XWiki.UIExtensionClass</className>
-    <guid>b620d005-02d1-476d-885c-0fc916b3e917</guid>
     <class>
       <name>XWiki.UIExtensionClass</name>
       <customClass/>
@@ -130,6 +110,10 @@
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </scope>
     </class>
+    <name>PublicationWorkflow.WebHome</name>
+    <number>0</number>
+    <className>XWiki.UIExtensionClass</className>
+    <guid>b620d005-02d1-476d-885c-0fc916b3e917</guid>
     <property>
       <content/>
     </property>
@@ -148,4 +132,23 @@ icon=icon:branch</parameters>
       <scope>wiki</scope>
     </property>
   </object>
+  <content>{{velocity}}
+#set ($mainPageReference = $services.model.createDocumentReference('', ['PublicationWorkflow'], 'PublicationWorkflowClass'))
+#if (!$services.licensing.licensor.hasLicensureForEntity($mainPageReference))
+  {{error}}
+    $services.localization.render('workflow.error.noValidLicense')
+  {{/error}}
+#else
+  #set($columns = ["doc.title", "contributor", "moderator", "validator"])
+  #set($columnsProperties = {
+     "doc.title" : {"type" : "text", "link" : "view"}
+  })
+  #set($options = { 
+    "className":"PublicationWorkflow.PublicationWorkflowConfigClass",
+    'translationPrefix': 'meeting.livetable.',
+    "rowCount": 10
+  })
+  #livetable("publicationworkflow" $columns $columnsProperties $options)
+#end
+{{/velocity}}</content>
 </xwikidoc>

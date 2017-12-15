@@ -97,7 +97,7 @@ workflow.archive = Archive
 workflow.publishfromarchive = Republish
 workflow.valid = Validate without publishing
 workflow.editDraft = Edit draft
-workflow.error.noValidLicense=There is no valid license for the Publication Workflow Application (Pro).
+workflow.extension.name=Publication Workflow Application (Pro)
 
 workflow.backtodraft = Move back to drafts
 workflow.panel.noContributionRight = You don't have the necessary privileges to contribute this document.

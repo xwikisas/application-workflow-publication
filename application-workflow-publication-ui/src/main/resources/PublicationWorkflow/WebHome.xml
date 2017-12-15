@@ -132,12 +132,12 @@ icon=icon:branch</parameters>
       <scope>wiki</scope>
     </property>
   </object>
-  <content>{{velocity}}
+  <content>{{include reference="Licenses.Code.VelocityMacros"/}}
+
+{{velocity}}
 #set ($mainPageReference = $services.model.createDocumentReference('', ['PublicationWorkflow'], 'PublicationWorkflowClass'))
 #if (!$services.licensing.licensor.hasLicensureForEntity($mainPageReference))
-  {{error}}
-    $services.localization.render('workflow.error.noValidLicense')
-  {{/error}}
+  {{error}}#getMissingLicenseMessage('workflow.extension.name'){{/error}}
 #else
   #set($columns = ["doc.title", "contributor", "moderator", "validator"])
   #set($columnsProperties = {

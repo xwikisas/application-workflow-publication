@@ -32,7 +32,7 @@
   <packaging>pom</packaging>
   <version>1.9-SNAPSHOT</version>
   <properties>
-    <licensing.version>1.7</licensing.version>
+    <licensing.version>1.8-SNAPSHOT</licensing.version>
   </properties>
   <scm>
     <connection>scm:git:git://github.com/xwikisas/workflow-publication.git</connection>

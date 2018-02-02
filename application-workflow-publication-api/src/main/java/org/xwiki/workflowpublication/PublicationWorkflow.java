@@ -142,7 +142,7 @@ public interface PublicationWorkflow
     /* Functions to be used from the scripts */
 
     /**
-     * draft -> contributing + moderator gets explicit rights for edit and contributor does not have anymore. <br>
+     * Draft: contributing + moderator gets explicit rights for edit and contributor does not have anymore.
      * If there are no defined moderators, this will delegate to submitForValidation.
      * 
      * @param document is the draft document which needs to pass in moderating state
@@ -152,7 +152,7 @@ public interface PublicationWorkflow
     public boolean submitForModeration(DocumentReference document) throws XWikiException;
 
     /**
-     * moderating -> draft + contributor gets edit rights back
+     * Moderating: draft + contributor gets edit rights back.
      * 
      * @param document the document reference to be moderated
      * @param reason the reason for refusing moderation
@@ -162,7 +162,7 @@ public interface PublicationWorkflow
     public boolean refuseModeration(DocumentReference document, String reason) throws XWikiException;
 
     /**
-     * moderating -> validating. + moderator looses edit rights
+     * Moderating: validating. + moderator looses edit rights.
      * 
      * @param document the document reference to be validated
      * @return {@code true} if the document is submitted for validation, {@code false} otherwise
@@ -171,7 +171,7 @@ public interface PublicationWorkflow
     public boolean submitForValidation(DocumentReference document) throws XWikiException;
 
     /**
-     * validating -> draft. + contributor and moderator get back rights
+     * Validating: draft + contributor and moderator get back rights.
      * 
      * @param documnet the document to be validated
      * @param reason the reason for not validating
@@ -181,7 +181,7 @@ public interface PublicationWorkflow
     public boolean refuseValidation(DocumentReference documnet, String reason) throws XWikiException;
 
     /**
-     * validating -> validated. Rights stay the same as in validating state. This extra state is needed in order to be
+     * Validating: validated. Rights stay the same as in validating state. This extra state is needed in order to be
      * able to delay the effective publishing of the document (making it available to users as a published document).
      * 
      * @param document to be validated
@@ -191,7 +191,7 @@ public interface PublicationWorkflow
     public boolean validate(DocumentReference document) throws XWikiException;
 
     /**
-     * validated or validating -> published + document gets copied in its final place where it will be readonly anyway
+     * Validated or validating: published + document gets copied in its final place where it will be readonly anyway.
      * 
      * @param document to be published
      * @return {@code true} if the document is published, {@code false} otherwise
@@ -200,7 +200,7 @@ public interface PublicationWorkflow
     public DocumentReference publish(DocumentReference document) throws XWikiException;
 
     /**
-     * published -> draft. Published document gets deleted. Content from the published document can be copied to the
+     * Published: draft. Published document gets deleted. Content from the published document can be copied to the
      * draft or just ignored, depending on the parameter.
      * 
      * @param document the published document that should be turned to draft.
@@ -220,7 +220,7 @@ public interface PublicationWorkflow
     public boolean editDraft(DocumentReference document) throws XWikiException;
 
     /**
-     * published -> archived. Not yet sure how it would work.
+     * Published: archived. Not yet sure how it would work.
      * 
      * @param document the published document that should be archived.
      * @return {@code true} if the document should be archived, {@code false} otherwise
@@ -229,7 +229,7 @@ public interface PublicationWorkflow
     public boolean archive(DocumentReference document) throws XWikiException;
 
     /**
-     * archived -> draft. Archived document gets deleted. Content from the archived document can be copied to the draft
+     * Archived: draft. Archived document gets deleted. Content from the archived document can be copied to the draft
      * or just ignored, depending on the parameter.
      * 
      * @param document the archived document that should get drafted.
@@ -239,7 +239,7 @@ public interface PublicationWorkflow
     public DocumentReference unarchive(DocumentReference document, boolean forceToDraft) throws XWikiException;
 
     /**
-     * archived -> published. Not yet sure how it would work.
+     * Archived: published. Not yet sure how it would work.
      * 
      * @param document the archived document that should go back to being published.
      * @return {@code true} if the document should be published fro archive, {@code false} otherwise

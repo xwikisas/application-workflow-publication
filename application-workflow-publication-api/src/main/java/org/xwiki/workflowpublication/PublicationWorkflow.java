@@ -48,14 +48,22 @@ public interface PublicationWorkflow
      * authors. It is made to compare a published document with a draft document to decide whether one needs to be
      * overwritten with the other (on unpublish).
      * 
-     * @param fromDoc
-     * @param toDoc
-     * @param context
-     * @return
-     * @throws XWikiException
+     * @param fromDoc the source document
+     * @param toDoc the destination document
+     * @param context the XWiki context
+     * @return {@code true} if the two documents are different, {@code false} otherwise
+     * @throws XWikiException in case of problems
      */
     boolean isModified(XWikiDocument fromDoc, XWikiDocument toDoc, XWikiContext context) throws XWikiException;
 
+    /**
+     * @param doc the document reference
+     * @param workflowConfig the workflow configuration
+     * @param target the destination document
+     * @param xcontext the XWiki context
+     * @return {@code true} if the workflow starts, {@code false} otherwise
+     * @throws XWikiException in case of problems
+     */
     public boolean startWorkflow(DocumentReference doc, String workflowConfig, DocumentReference target,
         XWikiContext xcontext) throws XWikiException;
 
@@ -66,11 +74,11 @@ public interface PublicationWorkflow
      * as a published documemt. It does, however, all verifications (that there is no other worflow on that document,
      * etc).
      * 
-     * @param target
-     * @param workflowConfig
-     * @param xcontext
-     * @return
-     * @throws XWikiException
+     * @param target the target document reference
+     * @param workflowConfig the configuration
+     * @param xcontext the XWiki context
+     * @return {@code true} if the workflow starts on {@code target} as the published document, {@code false} otherwise
+     * @throws XWikiException in case of problems
      */
     public boolean startWorkflowAsTarget(DocumentReference target, String workflowConfig, XWikiContext xcontext)
         throws XWikiException;
@@ -80,10 +88,10 @@ public interface PublicationWorkflow
      * and which has the passed target as target. Note that this function looks for the draft document on the same wiki
      * as the passed target document.
      * 
-     * @param targetRef
-     * @param xcontext
-     * @return
-     * @throws XWikiException
+     * @param targetRef the target document reference
+     * @param xcontext the XWiki context
+     * @return the draft document reference
+     * @throws XWikiException in case of problems
      */
     public DocumentReference getDraftDocument(DocumentReference targetRef, XWikiContext xcontext) throws XWikiException;
 
@@ -95,11 +103,11 @@ public interface PublicationWorkflow
      * for a reason or another, the draft is not in the same wiki as the target document.
      * 
      * @param wiki parameter should be the wiki where the draft is expected to be.
-     * @param targetRef
-     * @param wiki
-     * @param xcontext
-     * @return
-     * @throws XWikiException
+     * @param targetRef the target document reference
+     * @param wiki the wiki name
+     * @param xcontext the XWiki context
+     * @return the draft document reference
+     * @throws XWikiException in case of problems
      * @since 1.1
      */
     public DocumentReference getDraftDocument(DocumentReference targetRef, String wiki, XWikiContext xcontext)
@@ -111,10 +119,10 @@ public interface PublicationWorkflow
      * the defaultDraftsSpace property of the workflow config of the target and the name of the draft document is an
      * unique name generated starting from the target document.
      * 
-     * @param targetRef
-     * @param xcontext
-     * @return
-     * @throws XWikiException
+     * @param targetRef the target document reference
+     * @param xcontext the XWiki context
+     * @return the draft document reference
+     * @throws XWikiException in case of problems
      */
     public DocumentReference createDraftDocument(DocumentReference targetRef, XWikiContext xcontext)
         throws XWikiException;
@@ -125,7 +133,7 @@ public interface PublicationWorkflow
      * from the workflow object that is attached to the passed document. If such workflow config does not exist, the
      * document will not be changed. Note that this function does not save the document, it just changes it.
      * 
-     * @param document The document to set the draft access settings on
+     * @param document the document to set the draft access settings on
      * @param xcontext the context of the modification
      * @throws XWikiException in case something goes wrong
      */
@@ -134,10 +142,11 @@ public interface PublicationWorkflow
     /* Functions to be used from the scripts */
 
     /**
-     * draft -> contributing + moderator gets explicit rights for edit and contributor does not have anymore. <br/>
+     * draft -> contributing + moderator gets explicit rights for edit and contributor does not have anymore. <br>
      * If there are no defined moderators, this will delegate to submitForValidation.
      * 
      * @param document is the draft document which needs to pass in moderating state
+     * @return {@code true} if the document is submitted for moderation, {@code false} otherwise
      * @throws XWikiException
      */
     public boolean submitForModeration(DocumentReference document) throws XWikiException;
@@ -145,29 +154,29 @@ public interface PublicationWorkflow
     /**
      * moderating -> draft + contributor gets edit rights back
      * 
-     * @param document
-     * @param reason
-     * @return
-     * @throws XWikiException
+     * @param document the document reference to be moderated
+     * @param reason the reason for refusing moderation
+     * @return {@code true} if the moderation is refused, {@code false} otherwise
+     * @throws XWikiException in case of problems
      */
     public boolean refuseModeration(DocumentReference document, String reason) throws XWikiException;
 
     /**
      * moderating -> validating. + moderator looses edit rights
      * 
-     * @param document
-     * @return
-     * @throws XWikiException
+     * @param document the document reference to be validated
+     * @return {@code true} if the document is submitted for validation, {@code false} otherwise
+     * @throws XWikiException in case of problems
      */
     public boolean submitForValidation(DocumentReference document) throws XWikiException;
 
     /**
      * validating -> draft. + contributor and moderator get back rights
      * 
-     * @param documnet
-     * @param reason
-     * @return
-     * @throws XWikiException
+     * @param documnet the document to be validated
+     * @param reason the reason for not validating
+     * @return {@code true} if the validation is refused, {@code false} otherwise
+     * @throws XWikiException in case of problems
      */
     public boolean refuseValidation(DocumentReference documnet, String reason) throws XWikiException;
 
@@ -175,18 +184,18 @@ public interface PublicationWorkflow
      * validating -> validated. Rights stay the same as in validating state. This extra state is needed in order to be
      * able to delay the effective publishing of the document (making it available to users as a published document).
      * 
-     * @param document
-     * @return
-     * @throws XWikiException
+     * @param document to be validated
+     * @return {@code true} if the document is validated, {@code false} otherwise
+     * @throws XWikiException in case of problems
      */
     public boolean validate(DocumentReference document) throws XWikiException;
 
     /**
      * validated or validating -> published + document gets copied in its final place where it will be readonly anyway
      * 
-     * @param document
-     * @return
-     * @throws XWikiException
+     * @param document to be published
+     * @return {@code true} if the document is published, {@code false} otherwise
+     * @throws XWikiException in case of problems
      */
     public DocumentReference publish(DocumentReference document) throws XWikiException;
 
@@ -195,9 +204,9 @@ public interface PublicationWorkflow
      * draft or just ignored, depending on the parameter.
      * 
      * @param document the published document that should be turned to draft.
-     * @param forceToDraft
+     * @param forceToDraft the flag to specify if the published document cen be  copied to the draft
      * @return the draft document
-     * @throws XWikiException
+     * @throws XWikiException in case of problems
      */
     public DocumentReference unpublish(DocumentReference document, boolean forceToDraft) throws XWikiException;
 
@@ -205,8 +214,8 @@ public interface PublicationWorkflow
      * To edit back a draft whose status is published
      * 
      * @param document The draft that we want to edit
-     * @return
-     * @throws XWikiException
+     * @return {@code true} if the draft should be edited, {@code false} otherwise
+     * @throws XWikiException in case of problems 
      */
     public boolean editDraft(DocumentReference document) throws XWikiException;
 
@@ -214,8 +223,8 @@ public interface PublicationWorkflow
      * published -> archived. Not yet sure how it would work.
      * 
      * @param document the published document that should be archived.
-     * @return
-     * @throws XWikiException
+     * @return {@code true} if the document should be archived, {@code false} otherwise
+     * @throws XWikiException in case of problems
      */
     public boolean archive(DocumentReference document) throws XWikiException;
 
@@ -224,8 +233,8 @@ public interface PublicationWorkflow
      * or just ignored, depending on the parameter.
      * 
      * @param document the archived document that should get drafted.
-     * @return
-     * @throws XWikiException
+     * @return {@code true} if the document should be unarchived, {@code false} otherwise
+     * @throws XWikiException in case of problems
      */
     public DocumentReference unarchive(DocumentReference document, boolean forceToDraft) throws XWikiException;
 
@@ -233,8 +242,8 @@ public interface PublicationWorkflow
      * archived -> published. Not yet sure how it would work.
      * 
      * @param document the archived document that should go back to being published.
-     * @return
-     * @throws XWikiException
+     * @return {@code true} if the document should be published fro archive, {@code false} otherwise
+     * @throws XWikiException in case of problems
      */
     public boolean publishFromArchive(DocumentReference document) throws XWikiException;
 }

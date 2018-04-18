@@ -23,7 +23,7 @@
   <parent>
     <groupId>com.xwiki.parent</groupId>
     <artifactId>xwikisas-parent-platform</artifactId>
-    <version>8.5</version>
+    <version>8.4-10</version>
   </parent>
   <groupId>com.xwiki.workflow-publication</groupId>
   <artifactId>application-workflow-publication</artifactId>
@@ -32,7 +32,7 @@
   <packaging>pom</packaging>
   <version>1.10-SNAPSHOT</version>
   <properties>
-    <licensing.version>1.8</licensing.version>
+    <licensing.version>1.12.1</licensing.version>
   </properties>
   <scm>
     <connection>scm:git:git://github.com/xwikisas/workflow-publication.git</connection>

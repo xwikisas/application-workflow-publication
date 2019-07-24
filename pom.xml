@@ -37,7 +37,7 @@
   <scm>
     <connection>scm:git:git://github.com/xwikisas/workflow-publication.git</connection>
     <developerConnection>scm:git:git@github.com:xwikisas/workflow-publication.git</developerConnection>
-    <url>https://github.com/xwikisas/workflow-publication</url>
+    <url>https://github.com/xwikisas/workflow-publication/tree/master</url>
     <tag>HEAD</tag>
   </scm>
   <modules>

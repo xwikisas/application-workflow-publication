@@ -24,7 +24,7 @@
   <parent>
     <groupId>com.xwiki.workflow-publication</groupId>
     <artifactId>application-workflow-publication</artifactId>
-    <version>1.10</version>
+    <version>1.11-SNAPSHOT</version>
   </parent>
   <artifactId>application-workflow-publication-ui</artifactId>
   <name>Publication Workflow Application (Pro)</name>
